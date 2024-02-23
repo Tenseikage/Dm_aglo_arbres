@@ -87,14 +87,42 @@ Arbre cree_G_3(void) {
     return g_3;
 }
 
-
 void affiche_indente(Arbre a, int niveau) {
     if (a != NULL) {
         for (int i = 0; i < niveau; i++) {
-            printf("  ");
+            printf("   ");
         }
-        printf("%s\n", a->val);
+       
+
+        printf("Valeur: %s\n", a->val); 
+        for (int i = 0; i < niveau; i++) {
+            printf("   ");
+        }
+
+        if (a->fg != NULL) {
+            printf("Gauche: %s\n", a->fg->val);
+        }
+        else {
+            printf("Gauche: NULL\n");
+        }
+        
+        for(int i = 0; i < niveau; i++) {
+            printf("   ");
+        }
+
+        if (a->fd != NULL) {
+            printf("Droite: %s\n", a->fd->val);
+        }
+        else {
+            printf("Droite: NULL\n");
+        }
         affiche_indente(a->fg, niveau + 1);
         affiche_indente(a->fd, niveau + 1);
+
+        
     }
 }
+
+
+
+
