@@ -100,7 +100,8 @@ void affiche_indente(Arbre a, int niveau) {
         }
 
         if (a->fg != NULL) {
-            printf("Gauche: %s\n", a->fg->val);
+            printf("Gauche: \n");
+            affiche_indente(a->fg, niveau + 1);
         }
         else {
             printf("Gauche: NULL\n");
@@ -111,13 +112,14 @@ void affiche_indente(Arbre a, int niveau) {
         }
 
         if (a->fd != NULL) {
-            printf("Droite: %s\n", a->fd->val);
+            printf("Droite:\n");
+            affiche_indente(a->fd, niveau + 1);
         }
         else {
             printf("Droite: NULL\n");
         }
-        affiche_indente(a->fg, niveau + 1);
-        affiche_indente(a->fd, niveau + 1);
+        
+        
 
         
     }
