@@ -19,11 +19,20 @@ void liberer(Arbre *a);
 // Création de l'arbre A_1
 Arbre cree_A_1(void);
 
+// Création de l'arbre G_1
+Arbre cree_G_1(void);
+
 // Création de l'arbre A_2
 Arbre cree_A_2(void);
 
+// Création de l'arbre G_2
+Arbre cree_G_2(void);
+
 // Création de l'arbre A_3
 Arbre cree_A_3(void);
+
+// Création de l'arbre G_3
+Arbre cree_G_3(void);
 
 // Affichage de l'arbre indenté (Affichage dans le fichier saage par la suite)
 void affiche_indente(Arbre a, int niveau);
