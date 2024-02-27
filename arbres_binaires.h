@@ -34,8 +34,7 @@ Arbre cree_A_3(void);
 // Création de l'arbre G_3
 Arbre cree_G_3(void);
 
-// Affichage de l'arbre indenté (Affichage dans le fichier saage par la suite)
-void affiche_indente(Arbre a, int niveau);
+
 
 
 #endif

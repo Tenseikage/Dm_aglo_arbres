@@ -6,11 +6,12 @@
 int main(void) {
     Arbre a_1 = cree_A_3();
     Arbre g_1 = cree_G_3();
-    affiche_indente(a_1, 0);
     printf("\n");
-    affiche_indente(g_1, 0);
     printf("\nRéussite expansion: %d\n\n", expansion(&a_1, g_1));
-    affiche_indente(a_1, 0);
+    serialise("test.saage", g_1);
+    Arbre a_2 = NULL;
+    //deserialise("test.saage", &a_2);
+    serialise("test2.saage", a_2);
 
     
     

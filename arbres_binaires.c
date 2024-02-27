@@ -87,44 +87,45 @@ Arbre cree_G_3(void) {
     return g_3;
 }
 
-void affiche_indente(Arbre a, int niveau) {
-    if (a != NULL) {
-        for (int i = 0; i < niveau; i++) {
-            printf("   ");
-        }
-       
 
-        printf("Valeur: %s\n", a->val); 
-        for (int i = 0; i < niveau; i++) {
-            printf("   ");
-        }
 
-        if (a->fg != NULL) {
-            printf("Gauche: \n");
-            affiche_indente(a->fg, niveau + 1);
-        }
-        else {
-            printf("Gauche: NULL\n");
-        }
-        
-        for(int i = 0; i < niveau; i++) {
-            printf("   ");
-        }
 
-        if (a->fd != NULL) {
-            printf("Droite:\n");
-            affiche_indente(a->fd, niveau + 1);
-        }
-        else {
-            printf("Droite: NULL\n");
-        }
-        
-        
+/*
+int construit_arbre(Arbre *a) {
+    int taille;
+    int cpt;
+    printf("Entrez la taille de l'arbre: ");
+    scanf("%d", &taille);
 
-        
+    if (taille < 0) {
+            perror("Erreur: taille négative\n");
+            return 0;
     }
-}
 
+    if (taille == 0) {
+        *a = NULL;
+        return 1;
+    }
+
+    char *mot = (char*)malloc(100 * sizeof(char));
+    if (mot == NULL) {
+        perror("Erreur d'allocation de mémoire\n");
+        return 0;
+    }
+
+    printf("Entrez la valeur de la racine: ");
+    scanf("%s", mot);
+    *a = alloue_noeud(mot);
+    if (*a == NULL) {
+        perror("Erreur d'allocation de mémoire\n");
+        return 0;
+    }
+
+    Arbre *courant = a;
+    return 1;
+    
+}
+*/
 
 
 
