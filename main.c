@@ -2,16 +2,29 @@
 #include "greffe.h"
 #include "saage.h"
 #include <stdio.h>
+#include <string.h>
 
-int main(void) {
+int main(int argc, char *argv[]) {
     Arbre a_1 = cree_A_3();
     Arbre g_1 = cree_G_3();
     printf("\n");
     printf("\nRéussite expansion: %d\n\n", expansion(&a_1, g_1));
-    serialise("test.saage", g_1);
-    Arbre a_2 = NULL;
-    //deserialise("test.saage", &a_2);
-    serialise("test2.saage", a_2);
+    
+
+    // Test: make arbre_greffe et ./saage -E test1.saage
+    if (strcmp(argv[1],"-E") == 0) {
+        serialise(argv[2], g_1);
+    }
+    /* deserialisation 
+    if (strcmp(argv[1],"-G") == 0) {
+        // Deserialisation des deux arbres
+        // Ajout de l'arbre g_1(argv[3]) dans a_1(argv[2])
+        
+    }
+    */
+
+
+
 
     
     
