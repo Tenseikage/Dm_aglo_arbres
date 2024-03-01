@@ -3,7 +3,7 @@ Gauche :
     Valeur : binaire
     Gauche : NULL
     Droite : NULL
-Droite :
+Droite : 
     Valeur : ternaire
     Gauche : NULL
     Droite : NULL
