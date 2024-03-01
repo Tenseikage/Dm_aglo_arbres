@@ -3,8 +3,12 @@
 #include "arbres_binaires.h"
 #include <stdio.h>
 
+// Permet de serialiser un arbre dans un fichier .saave
 int serialise(char * nom_de_fichier, Arbre A);
-void affiche_indente(Arbre a, int niveau, FILE *f);
+
+
+// Permet de deserialiser un arbre venant d'un fichier .saave
+int deserialise(char* nom_de_fichier);
 
 
 #endif

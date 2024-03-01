@@ -17,13 +17,13 @@ int main(int argc, char *argv[]) {
     }
     liberer(&a_1);
     liberer(&g_1);
-    /* deserialisation 
+    // deserialisation 
     if (strcmp(argv[1],"-G") == 0) {
         // Deserialisation des deux arbres
         // Ajout de l'arbre g_1(argv[3]) dans a_1(argv[2])
+        deserialise(argv[2]);
         
     }
-    */
 
 
 

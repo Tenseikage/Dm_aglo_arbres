@@ -5,7 +5,7 @@
 #include <string.h>
 
 
-void affiche_indente(Arbre a, int niveau, FILE *f) {
+static void affiche_indente(Arbre a, int niveau, FILE *f) {
     if (a != NULL) {
         for (int i = 0; i < niveau; i++) {
             fprintf(f, "   ");
@@ -44,8 +44,6 @@ void affiche_indente(Arbre a, int niveau, FILE *f) {
 }
 
 
-
-
 int serialise(char *nom_de_fichier,Arbre A){
   FILE *f;
   f=fopen(nom_de_fichier,"w");
@@ -67,3 +65,15 @@ int serialise(char *nom_de_fichier,Arbre A){
   
 }
 
+
+int deserialise(char* nom_de_fichier) {
+    FILE *f;
+    f = fopen(nom_de_fichier, "r");
+    char line[128];
+    while (fgets(line, 128, f) != NULL) {
+        printf("%s\n", line);
+    }
+
+
+    return 0;
+}
