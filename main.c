@@ -7,6 +7,7 @@
 int main(int argc, char *argv[]) {
     Arbre a_1 = cree_A_1();
     Arbre g_1 = cree_G_3();
+    Arbre a_2;
     printf("\n");
     printf("\nRéussite expansion: %d\n\n", expansion(&a_1, g_1));
     
@@ -38,6 +39,7 @@ int main(int argc, char *argv[]) {
 
         fclose(f);
         fclose(g);
+        construit_arbre(&a_2);
         
     }
 

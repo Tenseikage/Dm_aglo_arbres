@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
 #include "arbres_binaires.h"
 
 
@@ -90,42 +91,50 @@ Arbre cree_G_3(void) {
 
 
 
-/*
-int construit_arbre(Arbre *a) {
-    int taille;
-    int cpt;
-    printf("Entrez la taille de l'arbre: ");
-    scanf("%d", &taille);
 
-    if (taille < 0) {
-            perror("Erreur: taille négative\n");
+int construit_arbre(Arbre* a) {
+    char *noeud = malloc(100 * sizeof(char));
+    printf("entrez une chaîne de caractères : ");
+    scanf("%s", noeud);
+    while (1) {
+        if (noeud == NULL) {
             return 0;
-    }
+        }
+        if (strcmp(noeud, "end") == 0) {
+            break;
+        }
 
-    if (taille == 0) {
-        *a = NULL;
-        return 1;
-    }
+        else if (*noeud == '0') {
+            printf("noeud vide\n");
+            noeud++;
+        }
+        else if (*noeud == ' ') {
+            noeud++;
+        }
 
-    char *mot = (char*)malloc(100 * sizeof(char));
-    if (mot == NULL) {
-        perror("Erreur d'allocation de mémoire\n");
-        return 0;
+        else if (*noeud == '1') {
+            printf("noeud non vide\n");
+            noeud++;
+            *a = alloue_noeud(noeud);
+        } else {
+            noeud++;
+        }
+        construit_arbre(&((*a)->fg));
+        construit_arbre(&((*a)->fd));
+        
     }
-
-    printf("Entrez la valeur de la racine: ");
-    scanf("%s", mot);
-    *a = alloue_noeud(mot);
-    if (*a == NULL) {
-        perror("Erreur d'allocation de mémoire\n");
-        return 0;
-    }
-
-    Arbre *courant = a;
     return 1;
-    
-}
-*/
 
+}
+    
+
+
+
+int main(int argc, char const *argv[])
+{
+    Arbre a_1;
+    construit_arbre(&a_1);
+    return 0;
+}
 
 

@@ -34,6 +34,8 @@ Arbre cree_A_3(void);
 // Création de l'arbre G_3
 Arbre cree_G_3(void);
 
+// Construction de l'arbre 
+int construit_arbre(Arbre *a);
 
 
 
