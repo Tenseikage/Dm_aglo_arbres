@@ -2,6 +2,7 @@
 #include "arbres_binaires.h"
 #include <stdio.h>
 #include <string.h>
+#include <assert.h>
 
 
 static int copie_rec(Arbre* dest, Arbre source) {
@@ -54,6 +55,9 @@ static int copie_greffon(Arbre* dest, Arbre source, Arbre A) {
 
 
 int copie(Arbre* dest, Arbre source) {
+    
+    assert(source != NULL);
+
     if (copie_rec(dest, source) == 0) {
         liberer(dest);
         return 0;

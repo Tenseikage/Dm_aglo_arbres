@@ -3,9 +3,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
 
 static void affiche_indente(Arbre a, int niveau, FILE *f) {
+    
+    assert(f != NULL);
+    assert(a != NULL);
+
     if (a != NULL) {
         for (int i = 0; i < niveau; i++) {
             fprintf(f, "    ");
@@ -76,6 +81,7 @@ int serialise(char *nom_de_fichier,Arbre A){
 
 
 void deserialise(FILE *f, Arbre *A, int iteration) {
+
     char line[LENGTH_VALUE];
     if (fgets(line, LENGTH_VALUE, f) != NULL) {
         // Cas ou fichier.saage non vide

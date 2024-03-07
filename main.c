@@ -5,13 +5,24 @@
 #include <string.h>
 
 int main(int argc, char *argv[]) {
+
+
+    if (argc < 2) {
+        fprintf(stderr, "Erreur: pas assez d'arguments\n");
+        return 1;
+
+    } else if (argc > 4) {
+        fprintf(stderr, "Erreur: trop d'arguments\n");
+        return 1;
+    }
+
     Arbre a_1 = cree_A_1();
     Arbre g_1 = cree_G_3();
-    Arbre a_2;
     printf("\n");
+    printf("Arbre A_1:\n");
     printf("\nRéussite expansion: %d\n\n", expansion(&a_1, g_1));
-    
 
+    
     // Test: make arbre_greffe et ./saage -E test1.saage
     if (strcmp(argv[1],"-E") == 0) {
         serialise(argv[2], a_1);
@@ -39,14 +50,10 @@ int main(int argc, char *argv[]) {
 
         fclose(f);
         fclose(g);
-        construit_arbre(&a_2);
-        
+
     }
 
-
-
-
-    
     
     return 0;
+
 }

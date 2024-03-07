@@ -92,49 +92,5 @@ Arbre cree_G_3(void) {
 
 
 
-int construit_arbre(Arbre* a) {
-    char *noeud = malloc(100 * sizeof(char));
-    printf("entrez une chaîne de caractères : ");
-    scanf("%s", noeud);
-    while (1) {
-        if (noeud == NULL) {
-            return 0;
-        }
-        if (strcmp(noeud, "end") == 0) {
-            break;
-        }
-
-        else if (*noeud == '0') {
-            printf("noeud vide\n");
-            noeud++;
-        }
-        else if (*noeud == ' ') {
-            noeud++;
-        }
-
-        else if (*noeud == '1') {
-            printf("noeud non vide\n");
-            noeud++;
-            *a = alloue_noeud(noeud);
-        } else {
-            noeud++;
-        }
-        construit_arbre(&((*a)->fg));
-        construit_arbre(&((*a)->fd));
-        
-    }
-    return 1;
-
-}
-    
-
-
-
-int main(int argc, char const *argv[])
-{
-    Arbre a_1;
-    construit_arbre(&a_1);
-    return 0;
-}
 
 
