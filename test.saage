@@ -1,21 +1,18 @@
-Valeur : Anémone
+Valeur : Intel Core I9
 Gauche : 
-    Valeur : Camomille
+    Valeur : Apple M3 Max
     Gauche : NULL
-    Droite : NULL
+    Droite :
+        Valeur : AMD Ryzen 9
+        Gauche : 
+            Valeur : Intel Core I9
+            Gauche : NULL
+            Droite : NULL
+        Droite : NULL
 Droite :
-    Valeur : Camomille
+    Valeur : Intel
     Gauche : 
-        Valeur : Dahlia
+        Valeur : Intel Core I9
         Gauche : NULL
-        Droite :
-            Valeur : Camomille
-            Gauche : 
-                Valeur : Iris
-                Gauche : NULL
-                Droite : NULL
-            Droite :
-                Valeur : Jasmin
-                Gauche : NULL
-                Droite : NULL
+        Droite : NULL
     Droite : NULL

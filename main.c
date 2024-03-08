@@ -71,9 +71,13 @@ int main(int argc, char *argv[]) {
             }
         }
 
-        expansion(&source, greffon);
+        if (expansion(&source, greffon) == 0) {
+            fprintf(stderr, "Erreur: Probleme Allocation Expansion");
+        } else {
+            affiche_indente(source, 0, stdout);
+        }
 
-        affiche_indente(source, 0, stdout);
+        
 
         liberer(&source);
         liberer(&greffon);
