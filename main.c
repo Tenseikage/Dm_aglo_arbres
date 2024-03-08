@@ -16,33 +16,64 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    Arbre a_1 = cree_A_1();
-    Arbre g_1 = cree_G_3();
-    printf("\n");
-    printf("Arbre A_1:\n");
-    printf("\nRéussite expansion: %d\n\n", expansion(&a_1, g_1));
-
     
-    // Test: make arbre_greffe et ./saage -E test1.saage
+    // serialisation
     if (strcmp(argv[1],"-E") == 0) {
-        serialise(argv[2], a_1);
+        Arbre new;
+        if (construit_arbre(&new) == 0) {
+            liberer(&new);
+            fprintf(stderr, "Erreur: Probleme Allocation\n");
+            return 0;
+        }
+        serialise(argv[2], new);
+        liberer(&new);
     }
-    liberer(&a_1);
-    liberer(&g_1);
     // deserialisation 
     if (strcmp(argv[1],"-G") == 0) {
-        // Deserialisation des deux arbres
-        // Ajout de l'arbre g_1(argv[3]) dans a_1(argv[2])
         FILE *f, *g;
         f = fopen(argv[2], "r");
         g = fopen(argv[3], "r");
         Arbre source, greffon;
-        deserialise(f, &source, 0);
-        deserialise(g, &greffon, 0);
+        int result_source = deserialise(f, &source, 0);
+        if (result_source != 1) {
+            switch (result_source) {
+                case -1: {
+                    fprintf(stderr, "Erreur: Fichier %s vide", argv[2]);
+                    break;
+                }
+                case 0: {
+                    fprintf(stderr, "Erreur: Probleme Allocation %s", argv[2]);
+                    break;
+                }
+                liberer(&source);
+                fclose(f);
+                fclose(g);
+                return 0;
+            }
+        }
         
+        int result_greffon = deserialise(g, &greffon, 0);
+        if (result_greffon != 1) {
+            switch (result_greffon) {
+                case -1: {
+                    fprintf(stderr, "Erreur: Fichier %s vide", argv[3]);
+                    break;
+                }
+                case 0: {
+                    fprintf(stderr, "Erreur: Probleme Allocation %s", argv[3]);
+                    break;
+                }
+                liberer(&source);
+                liberer(&greffon);
+                fclose(f);
+                fclose(g);
+                return 0;
+            }
+        }
+
         expansion(&source, greffon);
 
-        serialise("fusion.saage", source);
+        affiche_indente(source, 0, stdout);
 
         liberer(&source);
         liberer(&greffon);

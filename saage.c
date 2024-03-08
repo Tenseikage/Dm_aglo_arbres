@@ -6,7 +6,7 @@
 #include <assert.h>
 
 
-static void affiche_indente(Arbre a, int niveau, FILE *f) {
+void affiche_indente(Arbre a, int niveau, FILE *f) {
     
     assert(f != NULL);
     assert(a != NULL);
@@ -49,15 +49,6 @@ static void affiche_indente(Arbre a, int niveau, FILE *f) {
 }
 
 
-static void decal_val_nul(char* string) {
-    int len = 0;
-    while (string[len] != '\n') {
-        len++;
-    }
-    string[len] = '\0';
-}
-
-
 int serialise(char *nom_de_fichier,Arbre A){
   FILE *f;
   f=fopen(nom_de_fichier,"w");
@@ -80,7 +71,7 @@ int serialise(char *nom_de_fichier,Arbre A){
 }
 
 
-void deserialise(FILE *f, Arbre *A, int iteration) {
+int deserialise(FILE *f, Arbre *A, int iteration) {
 
     char line[LENGTH_VALUE];
     if (fgets(line, LENGTH_VALUE, f) != NULL) {
@@ -88,15 +79,24 @@ void deserialise(FILE *f, Arbre *A, int iteration) {
 
         decal_val_nul(line);
         *A = alloue_noeud(&line[9 + iteration]);
-
-        fgets(line, LENGTH_VALUE, f);
-        if (line[10 + iteration] == '\0') {
-            deserialise(f, &(*A)->fg, iteration + 4);
+        if (*A == NULL) {
+            return 0;
         }
 
         fgets(line, LENGTH_VALUE, f);
         if (line[10 + iteration] == '\0') {
-            deserialise(f, &(*A)->fd, iteration + 4);
+            if (deserialise(f, &(*A)->fg, iteration + 4) == 0) {
+                return 0;
+            }
         }
+
+        fgets(line, LENGTH_VALUE, f);
+        if (line[10 + iteration] == '\0') {
+            if (deserialise(f, &(*A)->fd, iteration + 4) == 0) {
+                return 0;
+            }
+        }
+        return 1;
     }
+    return -1;
 }

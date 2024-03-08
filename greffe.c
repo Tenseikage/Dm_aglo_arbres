@@ -56,7 +56,7 @@ static int copie_greffon(Arbre* dest, Arbre source, Arbre A) {
 
 int copie(Arbre* dest, Arbre source) {
     
-    assert(source != NULL);
+    // assert(source != NULL);
 
     if (copie_rec(dest, source) == 0) {
         liberer(dest);

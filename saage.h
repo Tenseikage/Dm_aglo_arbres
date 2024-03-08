@@ -2,14 +2,17 @@
 #define __SAAGE_H__
 #include "arbres_binaires.h"
 #include <stdio.h>
-#define LENGTH_VALUE 64
+
+// PErmet d'afficher l'arbre indenter facon .saage
+void affiche_indente(Arbre a, int niveau, FILE *f);
+
 
 // Permet de serialiser un arbre dans un fichier .saave
 int serialise(char * nom_de_fichier, Arbre A);
 
 
 // Permet de deserialiser un arbre venant d'un fichier .saave
-void deserialise(FILE* f, Arbre* A, int iteration);
+int deserialise(FILE* f, Arbre* A, int iteration);
 
 
 #endif

@@ -1,9 +1,21 @@
-Valeur : arbre
+Valeur : Anémone
 Gauche : 
-    Valeur : binaire
+    Valeur : Camomille
     Gauche : NULL
     Droite : NULL
 Droite :
-    Valeur : ternaire
-    Gauche : NULL
+    Valeur : Camomille
+    Gauche : 
+        Valeur : Dahlia
+        Gauche : NULL
+        Droite :
+            Valeur : Camomille
+            Gauche : 
+                Valeur : Iris
+                Gauche : NULL
+                Droite : NULL
+            Droite :
+                Valeur : Jasmin
+                Gauche : NULL
+                Droite : NULL
     Droite : NULL

@@ -10,13 +10,11 @@
 
 Noeud* alloue_noeud(char *s) {
     Noeud *nouv_noeud = (Noeud*)malloc(sizeof(Noeud));
-    if (nouv_noeud == NULL) {
-        fprintf(stderr, "Erreur d'allocation de mémoire\n");
-        exit(1);
+    if (nouv_noeud != NULL) {
+        nouv_noeud->val = strdup(s); // strdup() alloue de la mémoire pour la chaîne de caractères et copie la chaîne dans cette mémoire
+        nouv_noeud->fg = NULL;
+        nouv_noeud->fd = NULL;
     }
-    nouv_noeud->val = strdup(s); // strdup() alloue de la mémoire pour la chaîne de caractères et copie la chaîne dans cette mémoire
-    nouv_noeud->fg = NULL;
-    nouv_noeud->fd = NULL;
     return nouv_noeud;
 }
 
@@ -29,7 +27,16 @@ void liberer(Arbre *a) {
         free(*a);
         *a = NULL;
     }
-} 
+}
+
+
+void decal_val_nul(char* string) {
+    int len = 0;
+    while (string[len] != '\n') {
+        len++;
+    }
+    string[len] = '\0';
+}
 
 
 Arbre cree_A_1(void) {
@@ -89,8 +96,26 @@ Arbre cree_G_3(void) {
 }
 
 
-
-
+int construit_arbre(Arbre *a) {
+    int value;
+    fscanf(stdin, "%d", &value);
+    if (value == 1) {
+        char string[LENGTH_VALUE];
+        fgets(string, LENGTH_VALUE, stdin);
+        decal_val_nul(string);
+        *a = alloue_noeud(&string[1]);
+        if (*a == NULL) {
+            return 0;
+        }
+        if (construit_arbre(&(*a)->fg) == 0) {
+            return 0;
+        }
+        if (construit_arbre(&(*a)->fd) == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
 
 
 
