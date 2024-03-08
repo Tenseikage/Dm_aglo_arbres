@@ -50,6 +50,8 @@ void affiche_indente(Arbre a, int niveau, FILE *f) {
 
 
 int serialise(char *nom_de_fichier,Arbre A){
+
+  assert(nom_de_fichier != NULL);
   FILE *f;
   f=fopen(nom_de_fichier,"w");
   char commande[256];
@@ -73,6 +75,8 @@ int serialise(char *nom_de_fichier,Arbre A){
 
 int deserialise(FILE *f, Arbre *A, int iteration) {
 
+    assert(f != NULL);
+    
     char line[LENGTH_VALUE];
     if (fgets(line, LENGTH_VALUE, f) != NULL) {
         // Cas ou fichier.saage non vide

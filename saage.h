@@ -3,7 +3,7 @@
 #include "arbres_binaires.h"
 #include <stdio.h>
 
-// PErmet d'afficher l'arbre indenter facon .saage
+// PErmet d'afficher l'arbre indenter façon .saage
 void affiche_indente(Arbre a, int niveau, FILE *f);
 
 
