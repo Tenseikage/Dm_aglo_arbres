@@ -19,7 +19,13 @@ int main(int argc, char *argv[]) {
     
     // serialisation
     if (strcmp(argv[1],"-E") == 0) {
+        if (strstr(argv[2], ".saage") == NULL) {
+            fprintf(stderr, "Erreur: Le fichier de sortie doit être un fichier .saage\n");
+            return 0;
+        }
         Arbre new;
+        printf("Entrez le noeud de l'arbre. Entrez 0 pour un fils vide et 1 pour un noeud, finissez par 0 0 0 pour terminer\n");
+        printf("\n");
         if (construit_arbre(&new) == 0) {
             liberer(&new);
             fprintf(stderr, "Erreur: Probleme Allocation\n");
@@ -86,7 +92,7 @@ int main(int argc, char *argv[]) {
         fclose(f);
         fclose(g);
 
-    }
+    } 
 
     
     return 0;
