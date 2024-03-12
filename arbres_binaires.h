@@ -38,7 +38,8 @@ Arbre cree_A_3(void);
 // Création de l'arbre G_3
 Arbre cree_G_3(void);
 
-// Construction de l'arbre a la volee
+/* Cette fonction permet de créer un arbre binaire à la volée. Cette fonction renvoie 1 si cela se passe 
+bien et 0 sinon avec libération de l'arbre crée*/
 int construit_arbre(Arbre *a);
 
 

@@ -3,69 +3,89 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <assert.h>
 
 
-void affiche_indente(Arbre a, int niveau, FILE *f) {
+
+
+int affiche_indente(Arbre a, int niveau, FILE *f) {
     
-    assert(f != NULL);
-    assert(a != NULL);
-
+    
     if (a != NULL) {
         for (int i = 0; i < niveau; i++) {
-            fprintf(f, "    ");
+            if (fprintf(f, "    ") < 0) {
+                return 0;
+            }
+
         }
        
 
         fprintf(f, "Valeur : %s\n", a->val); 
         for (int i = 0; i < niveau; i++) {
-            fprintf(f, "    ");
+            if (fprintf(f, "    ") < 0) {
+                return 0;
+            }
+
         }
 
         if (a->fg != NULL) {
-            fprintf(f, "Gauche : \n");
+            if (fprintf(f, "Gauche : \n") < 0) {
+                return 0;
+            }
+
             affiche_indente(a->fg, niveau + 1, f);
         }
         else {
-            fprintf(f, "Gauche : NULL\n");
+            if (fprintf(f, "Gauche : NULL\n") < 0) {
+                return 0;
+            }
         }
         
         for(int i = 0; i < niveau; i++) {
-            fprintf(f, "    ");
+            if (fprintf(f, "    ") < 0) {
+                return 0;
+            }
         }
 
         if (a->fd != NULL) {
-            fprintf(f, "Droite :\n");
+            if (fprintf(f, "Droite :\n") < 0) {
+                return 0;
+            }
             affiche_indente(a->fd, niveau + 1 , f);
         }
         else {
-            fprintf(f, "Droite : NULL\n");
+            if (fprintf(f, "Droite : NULL\n") < 0) {
+                return 0;
+            }
         }
         
-        
-
-        
+    
     }
+
+    return 1;
 }
 
 
 int serialise(char *nom_de_fichier,Arbre A){
 
-  assert(nom_de_fichier != NULL);
+  
   FILE *f;
   f=fopen(nom_de_fichier,"w");
   char commande[256];
 
-  if(f==NULL){
-    printf("Erreur lors de l'ouverture du fichier\n");
+  if (f==NULL){
+    fprintf(stderr,"Erreur lors de l'ouverture du fichier");
     snprintf(commande, 256, "rm %s", nom_de_fichier);
     system(commande);
     return 0;
+  } 
+
+  if (affiche_indente(A,0,f) == 0) {
+    fprintf(stderr, "Erreur lors de la création du fichier");
+    snprintf(commande, 256, "rm %s", nom_de_fichier);
+    system(commande);
+    return 0;
+
   }
-
-  int niveau=0;
-  affiche_indente(A,niveau,f);
-
 
   fclose(f);
   return 1;
