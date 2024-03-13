@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
             return 0;
         }
         Arbre new;
-        printf("Entrez le noeud de l'arbre. Entrez 0 pour un fils vide et 1 pour un noeud, finissez par 0 0 0 pour terminer\n");
+        printf("Entrez le noeud de l'arbre. Entrez 0 pour un fils vide et 1 pour un noeud.\n");
         printf("\n");
         if (construit_arbre(&new) == 0) {
             liberer(&new);
@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
         f = fopen(argv[2], "r");
         g = fopen(argv[3], "r");
         Arbre source, greffon;
-        int result_source = deserialise(f, &source, 0);
+        int result_source = deserialise(f, &source);
         if (result_source != 1) {
             switch (result_source) {
                 case -1: {
@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
             }
         }
         
-        int result_greffon = deserialise(g, &greffon, 0);
+        int result_greffon = deserialise(g, &greffon);
         if (result_greffon != 1) {
             switch (result_greffon) {
                 case -1: {

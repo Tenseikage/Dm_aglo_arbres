@@ -47,7 +47,7 @@ int affiche_indente(Arbre a, int niveau, FILE *f) {
         }
 
         if (a->fd != NULL) {
-            if (fprintf(f, "Droite :\n") < 0) {
+            if (fprintf(f, "Droite : \n") < 0) {
                 return 0;
             }
             affiche_indente(a->fd, niveau + 1 , f);
@@ -93,10 +93,7 @@ int serialise(char *nom_de_fichier,Arbre A){
 }
 
 
-int deserialise(FILE *f, Arbre *A, int iteration) {
-
-    assert(f != NULL);
-    
+static int deserialise_aux(FILE *f, Arbre *A, int iteration) {
     char line[LENGTH_VALUE];
     if (fgets(line, LENGTH_VALUE, f) != NULL) {
         // Cas ou fichier.saage non vide
@@ -106,21 +103,35 @@ int deserialise(FILE *f, Arbre *A, int iteration) {
         if (*A == NULL) {
             return 0;
         }
-
         fgets(line, LENGTH_VALUE, f);
-        if (line[10 + iteration] == '\0') {
-            if (deserialise(f, &(*A)->fg, iteration + 4) == 0) {
+        printf("%s",line);
+        if (line[strlen(line)] == '\0') {
+            if (deserialise_aux(f, &(*A)->fg, iteration + 4) == 0) {
                 return 0;
             }
         }
 
+       
         fgets(line, LENGTH_VALUE, f);
-        if (line[10 + iteration] == '\0') {
-            if (deserialise(f, &(*A)->fd, iteration + 4) == 0) {
+        if (line[strlen(line)] == '\0') {
+            if (deserialise_aux(f, &(*A)->fd, iteration + 4) == 0) {
                 return 0;
             }
         }
         return 1;
-    }
+    } else {
+
     return -1;
+    }
+
+    return 0;
+
+}
+
+int deserialise(FILE *f, Arbre *A) {
+   
+   
+    int state = deserialise_aux(f,A,0);
+    printf("%d",state);
+    return state;
 }

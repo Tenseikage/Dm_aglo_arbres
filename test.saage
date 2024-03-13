@@ -1,18 +1,6 @@
-Valeur : Intel Core I9
+Valeur : binaire
 Gauche : 
-    Valeur : Apple M3 Max
+    Valeur : ternaire
     Gauche : NULL
-    Droite :
-        Valeur : AMD Ryzen 9
-        Gauche : 
-            Valeur : Intel Core I9
-            Gauche : NULL
-            Droite : NULL
-        Droite : NULL
-Droite :
-    Valeur : Intel
-    Gauche : 
-        Valeur : Intel Core I9
-        Gauche : NULL
-        Droite : NULL
     Droite : NULL
+Droite : NULL
