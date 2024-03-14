@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
         g = fopen(argv[3], "r");
         Arbre source = NULL;
         Arbre greffon = NULL;
-        int result_source = deserialise(f, &source, 0);
+        int result_source = deserialise(f, &source);
         if (result_source != 1) {
             switch (result_source) {
                 case -1: {
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
             return 0;
         }
         
-        int result_greffon = deserialise(g, &greffon, 0);
+        int result_greffon = deserialise(g, &greffon);
         if (result_greffon != 1) {
             switch (result_greffon) {
                 case -1: {

@@ -93,7 +93,7 @@ int serialise(char *nom_de_fichier,Arbre A){
 }
 
 
-int deserialise(FILE *f, Arbre *A, int iteration) {
+static int deserialise_aux(FILE *f, Arbre *A, int iteration) {
     
     char line[LENGTH_VALUE];
     if (fgets(line, LENGTH_VALUE, f) != NULL) {
@@ -107,18 +107,25 @@ int deserialise(FILE *f, Arbre *A, int iteration) {
 
         fgets(line, LENGTH_VALUE, f);
         if (line[10 + iteration] == '\0') {
-            if (deserialise(f, &(*A)->fg, iteration + 4) == 0) {
+            if (deserialise_aux(f, &(*A)->fg, iteration + 4) == 0) {
                 return 0;
             }
         }
 
         fgets(line, LENGTH_VALUE, f);
         if (line[10 + iteration] == '\0') {
-            if (deserialise(f, &(*A)->fd, iteration + 4) == 0) {
+            if (deserialise_aux(f, &(*A)->fd, iteration + 4) == 0) {
                 return 0;
             }
         }
         return 1;
     }
     return -1;
+}
+
+int deserialise(FILE *f, Arbre *A) {
+   
+   
+    int state = deserialise_aux(f,A,0);
+    return state;
 }
