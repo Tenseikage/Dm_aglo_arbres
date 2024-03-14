@@ -122,9 +122,15 @@ static int deserialise_aux(FILE *f, Arbre *A, int iteration) {
     return 1;
 }
 
-int deserialise(FILE *f, Arbre *A) {
-   
-   
-    int state = deserialise_aux(f, A, 0);
+int deserialise(char* nom_de_fichier, Arbre *A) {
+    FILE *f;
+    int state = 0;
+    f = fopen(nom_de_fichier, "r");
+
+    if (f != NULL) {
+        state = deserialise_aux(f, A, 0);
+    }
+
+    fclose(f);
     return state;
 }

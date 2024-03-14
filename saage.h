@@ -13,9 +13,9 @@ int affiche_indente(Arbre a, int niveau, FILE *f);
 int serialise(char * nom_de_fichier, Arbre A);
 
 
-/*Cette fonction lit lee fichier .saage dont le nom est passé en argument et crée l'arbre *a.
+/*Cette fonction lit le fichier .saage dont le nom est passé en argument et crée l'arbre *a.
 Cette fonction renvoie 1 si c'est bien passé 0 sinon avec libération de l'arbre */
-int deserialise(FILE *f, Arbre *A);
+int deserialise(char* nom_de_fichier, Arbre *A);
 
 
 #endif

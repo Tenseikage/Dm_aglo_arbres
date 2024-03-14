@@ -39,72 +39,40 @@ int main(int argc, char *argv[]) {
 
     // deserialisation 
     if (strcmp(argv[1],"-G") == 0) {
-        FILE *f, *g;
-        f = fopen(argv[2], "r");
-        g = fopen(argv[3], "r");
         Arbre source = NULL;
         Arbre greffon = NULL;
-        int result_source = deserialise(f, &source);
+
+        int result_source = deserialise(argv[2], &source);
+        int result_greffon = 0;
+    
         if (result_source != 1) {
-            switch (result_source) {
-                case -1: {
-                    fprintf(stderr, "Erreur: Fichier %s vide\n", argv[2]);
-                    break;
-                }
-                case 0: {
-                    fprintf(stderr, "Erreur: Probleme Allocation %s\n", argv[2]);
-                    break;
-                }
-            }
-            if (source != NULL) {
-                liberer(&source);
-            }
-            fclose(f);
-            fclose(g);
-            return 0;
-        }
-        
-        int result_greffon = deserialise(g, &greffon);
-        if (result_greffon != 1) {
-            switch (result_greffon) {
-                case -1: {
-                    fprintf(stderr, "Erreur: Fichier %s vide\n", argv[3]);
-                    break;
-                }
-                case 0: {
-                    fprintf(stderr, "Erreur: Probleme Allocation %s\n", argv[3]);
-                    break;
-                }
-            }
-            if (source != NULL) {
-                liberer(&source);
-            }
-            if (greffon != NULL) {
-                liberer(&greffon);
-            }
-            fclose(f);
-            fclose(g);
-            return 0;
-        }
-
-        if (expansion(&source, greffon) == 0) {
-            fprintf(stderr, "Erreur: Probleme Allocation Expansion\n");
+            fprintf(stderr, "Erreur: Probleme deserialise %s\n", argv[2]);
         } else {
-            affiche_indente(source, 0, stdout);
+            result_greffon = deserialise(argv[3], &greffon);
+
+            if (result_greffon != 1) {
+                fprintf(stderr, "Erreur: Probleme deserialise %s\n", argv[3]);
+            }
         }
 
-        
+        if (result_source == 1 && result_greffon == 1) {
+            if (!expansion(&source, greffon)) {
+                fprintf(stderr, "Erreur: Probleme Expansion\n");
+            } else {
+                affiche_indente(source, 0, stdout);
+            }
+        }
 
-        liberer(&source);
-        liberer(&greffon);
+        if (source != NULL) {
+            liberer(&source);
+        }
 
-
-        fclose(f);
-        fclose(g);
+        if (greffon != NULL) {
+            liberer(&greffon);
+        }
 
     } 
 
-    
     return 0;
 
 }
