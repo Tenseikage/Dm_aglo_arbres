@@ -98,7 +98,7 @@ static int deserialise_aux(FILE *f, Arbre *A, int iteration) {
     char line[LENGTH_VALUE];
     if (fgets(line, LENGTH_VALUE, f) != NULL) {
         // Cas ou fichier.saage non vide
-
+        fprintf(stdout, "Oui");
         decal_val_nul(line);
         *A = alloue_noeud(&line[9 + iteration]);
         if (*A == NULL) {
@@ -120,12 +120,12 @@ static int deserialise_aux(FILE *f, Arbre *A, int iteration) {
         }
         return 1;
     }
-    return -1;
+    return 1;
 }
 
 int deserialise(FILE *f, Arbre *A) {
    
    
-    int state = deserialise_aux(f,A,0);
+    int state = deserialise_aux(f, A, 0);
     return state;
 }
