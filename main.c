@@ -37,16 +37,6 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    if (strcmp(argv[1], "-Y") == 0) {
-        FILE *f;
-        f = fopen(argv[2], "r");
-        Arbre a;
-        deserialise(f, &a, 0);
-        affiche_indente(a, 0, stdout);
-        liberer(&a);
-        fclose(f);
-    }
-
     // deserialisation 
     if (strcmp(argv[1],"-G") == 0) {
         FILE *f, *g;
