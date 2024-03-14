@@ -93,7 +93,8 @@ int serialise(char *nom_de_fichier,Arbre A){
 }
 
 
-static int deserialise_aux(FILE *f, Arbre *A, int iteration) {
+int deserialise(FILE *f, Arbre *A, int iteration) {
+    
     char line[LENGTH_VALUE];
     if (fgets(line, LENGTH_VALUE, f) != NULL) {
         // Cas ou fichier.saage non vide
@@ -103,35 +104,21 @@ static int deserialise_aux(FILE *f, Arbre *A, int iteration) {
         if (*A == NULL) {
             return 0;
         }
+
         fgets(line, LENGTH_VALUE, f);
-        printf("%s",line);
-        if (line[strlen(line)] == '\0') {
-            if (deserialise_aux(f, &(*A)->fg, iteration + 4) == 0) {
+        if (line[10 + iteration] == '\0') {
+            if (deserialise(f, &(*A)->fg, iteration + 4) == 0) {
                 return 0;
             }
         }
 
-       
         fgets(line, LENGTH_VALUE, f);
-        if (line[strlen(line)] == '\0') {
-            if (deserialise_aux(f, &(*A)->fd, iteration + 4) == 0) {
+        if (line[10 + iteration] == '\0') {
+            if (deserialise(f, &(*A)->fd, iteration + 4) == 0) {
                 return 0;
             }
         }
         return 1;
-    } else {
-
-    return -1;
     }
-
-    return 0;
-
-}
-
-int deserialise(FILE *f, Arbre *A) {
-   
-   
-    int state = deserialise_aux(f,A,0);
-    printf("%d",state);
-    return state;
+    return -1;
 }
